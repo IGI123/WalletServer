@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prostate.wallet.mapper.write.ReceiptPaymentWriteMapper">
+  <resultMap id="BaseResultMap" type="com.prostate.wallet.entity.ReceiptPayment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="wallet_id" jdbcType="VARCHAR" property="walletId" />
+    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="receipt_payment_type" jdbcType="VARCHAR" property="receiptPaymentType" />
+    <result column="transaction_amount" jdbcType="VARCHAR" property="transactionAmount" />
+    <result column="payment_type" jdbcType="VARCHAR" property="paymentType" />
+    <result column="wallet_balance" jdbcType="VARCHAR" property="walletBalance" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, wallet_id, serial_number, receipt_payment_type, transaction_amount, payment_type, 
+    wallet_balance, remark, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from receipt_payment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from receipt_payment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.prostate.wallet.entity.ReceiptPayment">
+    insert into receipt_payment (id, wallet_id, serial_number, 
+      receipt_payment_type, transaction_amount, 
+      payment_type, wallet_balance, remark, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{walletId,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, 
+      #{receiptPaymentType,jdbcType=VARCHAR}, #{transactionAmount,jdbcType=VARCHAR}, 
+      #{paymentType,jdbcType=VARCHAR}, #{walletBalance,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.prostate.wallet.entity.ReceiptPayment">
+    insert into receipt_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="walletId != null">
+        wallet_id,
+      </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
+      <if test="receiptPaymentType != null">
+        receipt_payment_type,
+      </if>
+      <if test="transactionAmount != null">
+        transaction_amount,
+      </if>
+      <if test="paymentType != null">
+        payment_type,
+      </if>
+      <if test="walletBalance != null">
+        wallet_balance,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="walletId != null">
+        #{walletId,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPaymentType != null">
+        #{receiptPaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionAmount != null">
+        #{transactionAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="walletBalance != null">
+        #{walletBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.prostate.wallet.entity.ReceiptPayment">
+    update receipt_payment
+    <set>
+      <if test="walletId != null">
+        wallet_id = #{walletId,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPaymentType != null">
+        receipt_payment_type = #{receiptPaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionAmount != null">
+        transaction_amount = #{transactionAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentType != null">
+        payment_type = #{paymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="walletBalance != null">
+        wallet_balance = #{walletBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.prostate.wallet.entity.ReceiptPayment">
+    update receipt_payment
+    set wallet_id = #{walletId,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
+      receipt_payment_type = #{receiptPaymentType,jdbcType=VARCHAR},
+      transaction_amount = #{transactionAmount,jdbcType=VARCHAR},
+      payment_type = #{paymentType,jdbcType=VARCHAR},
+      wallet_balance = #{walletBalance,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

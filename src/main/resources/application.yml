@@ -7,7 +7,7 @@ server:
   port: 8901
 spring:
   application:
-    name: order-server
+    name: wallet-server
   profiles:
     active: dev
   datasource:
@@ -53,3 +53,4 @@ spring:
 # mybatis
 mybatis:
   type-aliases-package: com.prostate.*.entity
+#  mapper-locations: classpath*:mapping/wallet/*/*.xml

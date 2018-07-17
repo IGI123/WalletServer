@@ -149,11 +149,15 @@
 	</dependencyManagement>
 
 	<build>
+
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 
 			<!-- mybatis generator 自动生成代码插件 -->
 			<plugin>
@@ -174,7 +178,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.prostate.order.OrderApplication</mainClass>
+							<mainClass>com.prostate.wallet.OrderApplication</mainClass>
 							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>
