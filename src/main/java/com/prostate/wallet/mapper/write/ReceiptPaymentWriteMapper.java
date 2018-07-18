@@ -1,16 +1,19 @@
 package com.prostate.wallet.mapper.write;
 
 import com.prostate.wallet.entity.ReceiptPayment;
+import com.prostate.wallet.mapper.BaseWriteMapper;
+import org.springframework.stereotype.Repository;
 
-public interface ReceiptPaymentWriteMapper {
-    int deleteByPrimaryKey(String id);
-
-    int insert(ReceiptPayment record);
-
-    int insertSelective(ReceiptPayment record);
+@Repository
+public interface ReceiptPaymentWriteMapper extends BaseWriteMapper<ReceiptPayment>{
 
 
-    int updateByPrimaryKeySelective(ReceiptPayment record);
+    @Override
+    int insertSelective(ReceiptPayment receiptPayment);
 
-    int updateByPrimaryKey(ReceiptPayment record);
+    @Override
+    int updateSelective(ReceiptPayment receiptPayment);
+
+    @Override
+    int deleteById(String id);
 }

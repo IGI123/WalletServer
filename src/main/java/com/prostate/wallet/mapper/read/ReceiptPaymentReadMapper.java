@@ -1,17 +1,22 @@
 package com.prostate.wallet.mapper.read;
 
 import com.prostate.wallet.entity.ReceiptPayment;
+import com.prostate.wallet.mapper.BaseReadMapper;
+import org.springframework.stereotype.Repository;
 
-public interface ReceiptPaymentReadMapper {
-    int deleteByPrimaryKey(String id);
+import java.util.List;
 
-    int insert(ReceiptPayment record);
+@Repository
+public interface ReceiptPaymentReadMapper extends BaseReadMapper<ReceiptPayment>{
 
-    int insertSelective(ReceiptPayment record);
+    @Override
+    ReceiptPayment selectById(String id);
 
-    ReceiptPayment selectByPrimaryKey(String id);
+    @Override
+    List<ReceiptPayment> selectByParams(ReceiptPayment e);
 
-    int updateByPrimaryKeySelective(ReceiptPayment record);
+    List<ReceiptPayment> list(ReceiptPayment e);
 
-    int updateByPrimaryKey(ReceiptPayment record);
+    //统计数据量
+    int  count(String walletId);
 }

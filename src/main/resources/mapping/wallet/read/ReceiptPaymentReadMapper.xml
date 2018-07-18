@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prostate.wallet.mapper.read.ReceiptPaymentReadMapper">
+  <resultMap id="BaseResultMap" type="com.prostate.wallet.entity.ReceiptPayment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="wallet_id" jdbcType="VARCHAR" property="walletId" />
+    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="receipt_payment_type" jdbcType="VARCHAR" property="receiptPaymentType" />
+    <result column="transaction_amount" jdbcType="VARCHAR" property="transactionAmount" />
+    <result column="payment_type" jdbcType="VARCHAR" property="paymentType" />
+    <result column="wallet_balance" jdbcType="VARCHAR" property="walletBalance" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, wallet_id, serial_number, receipt_payment_type, transaction_amount, payment_type, 
+    wallet_balance, remark, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from receipt_payment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByParams" resultMap="BaseResultMap" >
+    SELECT id,wallet_id,serial_number,receipt_payment_type,transaction_amount,
+    payment_type,wallet_balance,remark,create_time from receipt_payment
+
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="walletId != null and walletId != ''"> and wallet_id = #{walletId} </if>
+      <if test="serialNumber != null and serialNumber != ''"> and serial_number = #{serialNumber} </if>
+      <if test="receiptPaymentType != null and receiptPaymentType != ''"> and receipt_payment_type = #{receiptPaymentType} </if>
+      <if test="transactionAmount != null and transactionAmount != ''"> and transaction_amount = #{transactionAmount} </if>
+      <if test="paymentType != null and paymentType != ''"> and payment_type = #{paymentType} </if>
+      <if test="walletBalance != null and walletBalance != ''"> and wallet_balance = #{walletBalance} </if>
+      <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+      <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+    </where>
+    <choose>
+      <otherwise>
+        order by create_time
+      </otherwise>
+    </choose>
+    <!--<if test="offset != null and limit != null">-->
+      <!--limit #{offset}, #{limit}-->
+    <!--</if>-->
+  </select>
+
+  <select id="count" resultType="int" >
+    select count(*) from receipt_payment
+    <where>
+      wallet_id = #{walletId}
+    </where>
+  </select>
+
+</mapper>
