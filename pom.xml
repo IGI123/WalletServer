@@ -30,37 +30,37 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--&lt;!&ndash;Eureka&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
-		<!--</dependency>-->
-		<!--&lt;!&ndash;Ribbon&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>-->
-		<!--</dependency>-->
-		<!--&lt;!&ndash;Hystrix&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
-		<!--</dependency>-->
-		<!--&lt;!&ndash;Feign&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-feign</artifactId>-->
-			<!--<version>2.0.0.M2</version>-->
-		<!--</dependency>-->
-		<!--&lt;!&ndash;Config&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-config</artifactId>-->
-		<!--</dependency>-->
-		<!--&lt;!&ndash;Zuul&ndash;&gt;-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-netflix-zuul</artifactId>-->
-		<!--</dependency>-->
+		<!--Eureka-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+		<!--Ribbon-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+		</dependency>
+		<!--Hystrix-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+		<!--Feign-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+			<version>2.0.0.M2</version>
+		</dependency>
+		<!--Config-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<!--Zuul-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+		</dependency>
 		<!--Junit-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->

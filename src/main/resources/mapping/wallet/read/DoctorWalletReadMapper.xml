@@ -31,4 +31,11 @@
     where doctor_id = #{doctorId,jdbcType=VARCHAR}
   </select>
 
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from doctor_wallet
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>

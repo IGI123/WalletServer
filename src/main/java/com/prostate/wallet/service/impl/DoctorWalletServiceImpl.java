@@ -31,12 +31,12 @@ public class DoctorWalletServiceImpl implements DoctorWalletService {
 
     @Override
     public int updateSelective(DoctorWallet e) {
-        return 0;
+        return doctorWalletWriteMapper.updateByPrimaryKeySelective(e);
     }
 
     @Override
     public DoctorWallet selectById(String id) {
-        return null;
+        return doctorWalletReadMapper.selectById(id);
     }
 
     @Override

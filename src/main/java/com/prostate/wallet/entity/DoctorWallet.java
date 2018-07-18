@@ -11,7 +11,7 @@ import java.util.Date;
  * @todo: 医生钱包信息的实体类
  * @param:   * @param null
  */
-@Component
+//@Component
 public class DoctorWallet {
 
     @NotNull(message = "id不能为空",groups = GroupID.class)
@@ -22,6 +22,7 @@ public class DoctorWallet {
     @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "医生id必须是32位字符串",groups = GroupWithoutID.class)
     private String doctorId;
 
+    @NotNull(message =" 金额不能为空" ,groups = {GroupWithoutID.class})
     private String walletBalance;
 
     private Date createTime;
@@ -116,5 +117,21 @@ public class DoctorWallet {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "DoctorWallet{" +
+                "id='" + id + '\'' +
+                ", doctorId='" + doctorId + '\'' +
+                ", walletBalance='" + walletBalance + '\'' +
+                ", createTime=" + createTime +
+                ", createUser='" + createUser + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateUser='" + updateUser + '\'' +
+                ", deleteTime=" + deleteTime +
+                ", deleteUser='" + deleteUser + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                '}';
     }
 }

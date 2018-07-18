@@ -1,6 +1,7 @@
 package com.prostate.wallet.controller;
 
 import com.prostate.wallet.entity.DoctorWallet;
+import com.prostate.wallet.entity.GroupID;
 import com.prostate.wallet.entity.GroupWithoutID;
 import com.prostate.wallet.service.DoctorWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class DoctorWalletController  extends BaseController {
      */
     @PostMapping("/save")
     public Map save(@Validated(GroupWithoutID.class) DoctorWallet doctorWallet){
-        doctorWallet.setWalletBalance("0.00");
+        doctorWallet.setWalletBalance("0");
         int r = doctorWalletService.insertSelective(doctorWallet);
         if (r>0){
             return insertSuccseeResponse();
@@ -64,4 +65,34 @@ public class DoctorWalletController  extends BaseController {
             return querySuccessResponse(doctorWallet);
         }
     }
+
+    /**
+     * @Author: bian
+     * @Date: 2018/7/17 16:32
+     * @todo:   增加钱包金额=============>支付订单和提现通用
+     * @param:
+     */
+    @PostMapping("/updateBalance")
+    public Map updateBalance(@Validated({GroupWithoutID.class,GroupID.class})DoctorWallet doctorWallet){
+        //根据钱包id查询到钱包信息
+        DoctorWallet doctorWalletFromDatabase = doctorWalletService.selectById(doctorWallet.getId());
+        //获取钱包余额
+        int sum = Integer.parseInt(doctorWalletFromDatabase.getWalletBalance());
+        //修改钱包金额
+        int newBalance = sum + Integer.parseInt(doctorWallet.getWalletBalance());
+        //余额不足
+        if (newBalance < 0){
+            return updateFailedResponse();
+        }
+        doctorWallet.setWalletBalance(newBalance+"");
+        //将钱包信息存回数据库
+        if (doctorWalletService.updateSelective(doctorWallet) > 0){
+            return updateSuccseeResponse();
+        }else {
+            return updateFailedResponse();
+        }
+    }
+
+
+
 }
