@@ -1,5 +1,6 @@
 package com.prostate.wallet.entity;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -13,23 +14,23 @@ import java.util.Date;
  */
 public class ReceiptPayment {
 
-    @NotNull(message = "id不能为空",groups = GroupID.class)
+    @NotBlank(message = "id不能为空",groups = GroupID.class)
     @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "id必须是32位字符串",groups = GroupID.class)
     private String id;
 
-    @NotNull(message =" 钱包id不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 钱包id不能为空" ,groups = {GroupWithoutID.class})
     @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "钱包id必须是32位字符串",groups = GroupWithoutID.class)
     private String walletId;
 
     private String serialNumber;
 
-    @NotNull(message =" 交易类型不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 交易类型不能为空" ,groups = {GroupWithoutID.class})
     private String receiptPaymentType;
 
-    @NotNull(message =" 交易金额不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 交易金额不能为空" ,groups = {GroupWithoutID.class})
     private String transactionAmount;
 
-    @NotNull(message =" 支付方式不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 支付方式不能为空" ,groups = {GroupWithoutID.class})
     private String paymentType;
 
     private String walletBalance;

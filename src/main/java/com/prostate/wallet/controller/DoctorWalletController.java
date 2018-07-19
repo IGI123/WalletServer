@@ -6,10 +6,7 @@ import com.prostate.wallet.entity.GroupWithoutID;
 import com.prostate.wallet.service.DoctorWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,7 +32,7 @@ public class DoctorWalletController  extends BaseController {
      * @param:   不含id的钱包对象，其中医生id不能为空，
      */
     @PostMapping("/save")
-    public Map save(@Validated(GroupWithoutID.class) DoctorWallet doctorWallet){
+    public Map save(@RequestBody  @Validated(GroupWithoutID.class) DoctorWallet doctorWallet){
         doctorWallet.setWalletBalance("0");
         int r = doctorWalletService.insertSelective(doctorWallet);
         if (r>0){
@@ -69,13 +66,17 @@ public class DoctorWalletController  extends BaseController {
     /**
      * @Author: bian
      * @Date: 2018/7/17 16:32
-     * @todo:   增加钱包金额=============>支付订单和提现通用
+     * @todo:   修改钱包金额=============>支付订单和提现通用
      * @param:
      */
     @PostMapping("/updateBalance")
-    public Map updateBalance(@Validated({GroupWithoutID.class,GroupID.class})DoctorWallet doctorWallet){
+    public Map updateBalance(@RequestBody  @Validated({GroupID.class,GroupWithoutID.class})DoctorWallet doctorWallet){
         //根据钱包id查询到钱包信息
         DoctorWallet doctorWalletFromDatabase = doctorWalletService.selectById(doctorWallet.getId());
+        //如果查询对象为空，直接返回。
+        if (doctorWalletFromDatabase == null){
+            return queryEmptyResponse();
+        }
         //获取钱包余额
         int sum = Integer.parseInt(doctorWalletFromDatabase.getWalletBalance());
         //修改钱包金额

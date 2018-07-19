@@ -2,6 +2,7 @@ package com.prostate.wallet.entity;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
@@ -14,15 +15,16 @@ import java.util.Date;
 //@Component
 public class DoctorWallet {
 
-    @NotNull(message = "id不能为空",groups = GroupID.class)
+    @NotBlank(message = "id不能为空",groups = GroupID.class)
     @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "id必须是32位字符串",groups = GroupID.class)
     private String id;
 
-    @NotNull(message =" 医生id不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 医生id不能为空" ,groups = {GroupWithoutID.class})
     @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "医生id必须是32位字符串",groups = GroupWithoutID.class)
     private String doctorId;
 
-    @NotNull(message =" 金额不能为空" ,groups = {GroupWithoutID.class})
+    @NotBlank(message =" 金额不能为空",groups = {GroupWithoutID.class})
+    //@Pattern(regexp = "^{6}",message = "金额不能大于6位",groups = GroupWithoutID.class)
     private String walletBalance;
 
     private Date createTime;

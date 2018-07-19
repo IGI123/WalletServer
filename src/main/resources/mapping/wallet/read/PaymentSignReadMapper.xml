@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prostate.wallet.mapper.read.PaymentSignReadMapper">
+  <resultMap id="BaseResultMap" type="com.prostate.wallet.entity.PaymentSign">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="wallet_id" jdbcType="VARCHAR" property="walletId" />
+    <result column="payment_password" jdbcType="VARCHAR" property="paymentPassword" />
+    <result column="slat" jdbcType="VARCHAR" property="slat" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, wallet_id, payment_password, slat, create_time, update_time
+  </sql>
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payment_sign
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectByParams" resultMap="BaseResultMap" >
+    SELECT id,wallet_id,payment_password,slat,create_time,
+    update_time from payment_sign
+
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="walletId != null and walletId != ''"> and wallet_id = #{walletId} </if>
+      <if test="paymentPassword != null and paymentPassword != ''"> and payment_password = #{paymentPassword} </if>
+      <if test="slat != null and slat != ''"> and slat = #{slat} </if>
+      <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+      <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+    </where>
+  </select>
+</mapper>

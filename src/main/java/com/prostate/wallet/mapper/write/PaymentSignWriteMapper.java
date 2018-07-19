@@ -1,15 +1,17 @@
 package com.prostate.wallet.mapper.write;
 
 import com.prostate.wallet.entity.PaymentSign;
+import com.prostate.wallet.mapper.BaseWriteMapper;
+import org.springframework.stereotype.Repository;
 
-public interface PaymentSignWriteMapper {
-    int deleteByPrimaryKey(String id);
+@Repository
+public interface PaymentSignWriteMapper extends BaseWriteMapper<PaymentSign>{
+    @Override
+    int insertSelective(PaymentSign paymentSign);
 
-    int insert(PaymentSign record);
+    @Override
+    int updateSelective(PaymentSign paymentSign);
 
-    int insertSelective(PaymentSign record);
-
-    int updateByPrimaryKeySelective(PaymentSign record);
-
-    int updateByPrimaryKey(PaymentSign record);
+    @Override
+    int deleteById(String id);
 }

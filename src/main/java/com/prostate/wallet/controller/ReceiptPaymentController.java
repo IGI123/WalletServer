@@ -8,10 +8,7 @@ import com.prostate.wallet.service.DoctorWalletService;
 import com.prostate.wallet.service.ReceiptPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,15 +36,19 @@ public class ReceiptPaymentController extends BaseController{
      * @param:   * @param null
      */
     @PostMapping("/save")
-    public Map save( @Validated(GroupWithoutID.class)ReceiptPayment receiptPayment){
+    public Map save( @RequestBody @Validated(GroupWithoutID.class)ReceiptPayment receiptPayment){
         int r = receiptPaymentService.insertSelective(receiptPayment);
         if (r>0){
             //如果交易成功，获取当前余额信息
-            DoctorWallet doctorWallet = doctorWalletService.selectById(receiptPayment.getWalletId());
-            //将余额信息重新写入交易记录表
-            receiptPayment.setWalletBalance(doctorWallet.getWalletBalance());
-            receiptPaymentService.updateSelective(receiptPayment);
-            return insertSuccseeResponse();
+            try {
+                DoctorWallet doctorWallet = doctorWalletService.selectById(receiptPayment.getWalletId());
+                //将余额信息重新写入交易记录表
+                receiptPayment.setWalletBalance(doctorWallet.getWalletBalance());
+                receiptPaymentService.updateSelective(receiptPayment);
+                return insertSuccseeResponse();
+            }catch (Exception e){
+                return queryEmptyResponse();
+            }
         } else {
             return insertFailedResponse();
         }
@@ -58,6 +59,7 @@ public class ReceiptPaymentController extends BaseController{
      * @Date: 2018/7/18 10:41
      * @todo: 查询交易记录
      * @param:   * @param null
+     *
      */
     @GetMapping("/getAll")
     public Map getAll( ReceiptPayment receiptPayment){

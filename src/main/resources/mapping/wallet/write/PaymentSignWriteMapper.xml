@@ -12,12 +12,6 @@
   <sql id="Base_Column_List">
     id, wallet_id, payment_password, slat, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from payment_sign
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from payment_sign
     where id = #{id,jdbcType=VARCHAR}
@@ -31,6 +25,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.prostate.wallet.entity.PaymentSign">
+    <selectKey keyProperty="id" resultType="string" order="BEFORE">
+      select replace(uuid(), '-', '') as id from dual
+    </selectKey>
     insert into payment_sign
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +70,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.prostate.wallet.entity.PaymentSign">
+  <update id="updateSelective" parameterType="com.prostate.wallet.entity.PaymentSign">
     update payment_sign
     <set>
       <if test="walletId != null">

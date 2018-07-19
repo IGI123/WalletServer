@@ -1,12 +1,21 @@
 package com.prostate.wallet.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class PaymentSign {
+
+    @NotBlank(message = "id不能为空",groups = GroupID.class)
+    @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "id必须是32位字符串",groups = GroupID.class)
     private String id;
 
+    @NotBlank(message = "钱包id不能为空",groups = GroupWithoutID.class)
+    @Pattern(regexp = "^[A-Za-z0-9]{32}",message = "钱包id必须是32位字符串",groups = GroupWithoutID.class)
     private String walletId;
 
+    @NotBlank(message = "密码不能为空",groups = GroupWithoutID.class)
     private String paymentPassword;
 
     private String slat;

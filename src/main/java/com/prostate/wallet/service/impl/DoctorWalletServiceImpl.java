@@ -36,7 +36,12 @@ public class DoctorWalletServiceImpl implements DoctorWalletService {
 
     @Override
     public DoctorWallet selectById(String id) {
-        return doctorWalletReadMapper.selectById(id);
+        try {
+            DoctorWallet doctorWallet  = doctorWalletReadMapper.selectById(id);
+            return doctorWallet;
+        }catch (Exception e){
+            return new DoctorWallet();
+        }
     }
 
     @Override

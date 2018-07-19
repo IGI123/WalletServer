@@ -1,17 +1,17 @@
 package com.prostate.wallet.mapper.read;
 
 import com.prostate.wallet.entity.PaymentSign;
+import com.prostate.wallet.mapper.BaseReadMapper;
+import org.springframework.stereotype.Repository;
 
-public interface PaymentSignReadMapper {
-    int deleteByPrimaryKey(String id);
+import java.util.List;
 
-    int insert(PaymentSign record);
+@Repository
+public interface PaymentSignReadMapper  extends BaseReadMapper<PaymentSign>{
 
-    int insertSelective(PaymentSign record);
+    @Override
+    PaymentSign selectById(String id);
 
-    PaymentSign selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(PaymentSign record);
-
-    int updateByPrimaryKey(PaymentSign record);
+    @Override
+    List<PaymentSign> selectByParams(PaymentSign paymentSign);
 }
