@@ -1,10 +1,12 @@
 package com.prostate.wallet.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
-
+@Component
 public class PaymentSign {
 
     @NotBlank(message = "id不能为空",groups = GroupID.class)

@@ -12,7 +12,7 @@ import java.util.Date;
  * @todo: 医生钱包信息的实体类
  * @param:   * @param null
  */
-//@Component
+@Component
 public class DoctorWallet {
 
     @NotBlank(message = "id不能为空",groups = GroupID.class)

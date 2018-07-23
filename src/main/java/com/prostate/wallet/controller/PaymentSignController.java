@@ -30,6 +30,9 @@ public class PaymentSignController  extends BaseController {
 
     @Autowired
     private DoctorWalletService doctorWalletService;
+
+    @Autowired
+    private PaymentSign paymentSign;
     /**
      * @Author: bian
      * @Date: 2018/7/18 16:17
@@ -37,7 +40,10 @@ public class PaymentSignController  extends BaseController {
      * @param:   * @param null
      */
     @PostMapping("/save")
-    public Map savePass(@Validated(GroupWithoutID.class) PaymentSign paymentSign){
+    public Map savePass(String paymentPassword,String token){
+        paymentSign.setWalletId(token);
+        paymentSign.setId(token);
+        paymentSign.setPaymentPassword(paymentPassword);
         //首先判断这个钱包存不存在
         if(doctorWalletService.selectById(paymentSign.getWalletId()) == null){
             return queryEmptyResponse();
@@ -57,7 +63,12 @@ public class PaymentSignController  extends BaseController {
      * @param:   * @param null
      */
     @PostMapping("/update")
-    public Map updatePass(@Validated({GroupID.class,GroupWithoutID.class})PaymentSign paymentSign){
+    public Map updatePass(String paymentPassword,String token){
+        paymentSign.setPaymentPassword(paymentPassword);
+        //医生token==医生id==钱包id==支付密码id
+        //医生未登录的话这些操作都是不允许的
+        paymentSign.setId(token);
+        paymentSign.setWalletId(token);
         if (paymentSignService.updateSelective(paymentSign) > 0){
             return updateSuccseeResponse();
         }else {
@@ -73,7 +84,10 @@ public class PaymentSignController  extends BaseController {
      * @param:   * @param null
      */
     @GetMapping("/check")
-    public Map checkPass(@Validated({GroupID.class,GroupWithoutID.class})PaymentSign paymentSign){
+    public Map checkPass(String paymentPassword,String token){
+        paymentSign.setWalletId(token);
+        paymentSign.setId(token);
+        paymentSign.setPaymentPassword(paymentPassword);
         List<PaymentSign> paymentSigns  = paymentSignService.selectByParams(paymentSign);
         if (paymentSigns.isEmpty()){
             return queryEmptyResponse();

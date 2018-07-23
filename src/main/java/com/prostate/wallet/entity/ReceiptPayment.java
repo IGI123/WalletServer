@@ -1,5 +1,7 @@
 package com.prostate.wallet.entity;
 
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,6 +14,7 @@ import java.util.Date;
  * @todo:   交易记录实体类
  * @param:   * @param null
  */
+@Component
 public class ReceiptPayment {
 
     @NotBlank(message = "id不能为空",groups = GroupID.class)

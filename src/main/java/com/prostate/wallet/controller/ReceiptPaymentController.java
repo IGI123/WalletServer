@@ -29,14 +29,19 @@ public class ReceiptPaymentController extends BaseController{
 
     @Autowired
     private DoctorWalletService doctorWalletService;
+
+    @Autowired
+    private ReceiptPayment receiptPayment;
     /**
      * @Author: bian
      * @Date: 2018/7/18 10:41
      * @todo: 添加交易记录
      * @param:   * @param null
      */
-    @PostMapping("/save")
-    public Map save( @RequestBody @Validated(GroupWithoutID.class)ReceiptPayment receiptPayment){
+    @PostMapping(value = "/save",consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    public Map save(@RequestBody  @Validated(GroupWithoutID.class)ReceiptPayment receiptPayment,String token){
+        //不论用户端传过来的钱包id是什么，都是以token为主
+        receiptPayment.setWalletId(token);
         int r = receiptPaymentService.insertSelective(receiptPayment);
         if (r>0){
             //如果交易成功，获取当前余额信息
@@ -62,16 +67,13 @@ public class ReceiptPaymentController extends BaseController{
      *
      */
     @GetMapping("/getAll")
-    public Map getAll( ReceiptPayment receiptPayment){
+    public Map getAll( String token){
+       receiptPayment.setId(token);
        List<ReceiptPayment> receiptPayments = receiptPaymentService.selectByParams(receiptPayment);
        //分页查询
-      // int count = receiptPaymentService.count(receiptPayment.getWalletId());
        if (receiptPayments.isEmpty()){
             return queryEmptyResponse();
         }else {
-           //分页查询
-            //return querySuccessResponse(receiptPayments, count+"");
-           //这是不分页的
            return querySuccessResponse(receiptPayments);
         }
     }

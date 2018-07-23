@@ -34,9 +34,6 @@
   </insert>
 
   <insert id="insertSelective" parameterType="com.prostate.wallet.entity.DoctorWallet">
-    <selectKey keyProperty="id" resultType="string" order="BEFORE">
-      select replace(uuid(), '-', '') as id from dual
-    </selectKey>
     insert into doctor_wallet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
