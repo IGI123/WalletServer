@@ -56,7 +56,7 @@ public class DoctorWalletController  extends BaseController {
      */
     @GetMapping("/selectByToken")
     public Map selectByDoctorId( String token){
-        //查询钱包信息
+        //查询钱包信息====因为token和id的值相等，所以把token当做id当做查询条件
         DoctorWallet doctorWallet = doctorWalletService.selectByDoctorId(token);
         //查询结果为空
         if (doctorWallet == null ){
@@ -74,7 +74,7 @@ public class DoctorWalletController  extends BaseController {
      * @todo:   修改钱包金额=============>支付订单和提现通用
      * @param:
      */
-    @PostMapping(value = "/updateBalance",consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/updateBalance")
     public Map updateBalance(@RequestBody @Validated({GroupID.class,GroupWithoutID.class})DoctorWallet doctorWallet,String token){
         //医生的token 和钱包id值是一样的，因此这里使用token获取钱包信息。如果医生未登录，就不能修改钱包信息了
         DoctorWallet doctorWalletFromDatabase = doctorWalletService.selectById(token);

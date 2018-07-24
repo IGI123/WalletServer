@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @Author: bian
  * @Date: 2018/7/18 10:40
- * @Todo:
+ * @Todo:  交易记录相关
  */
 @RestController
 @RequestMapping("/receiptPayment")
@@ -38,7 +38,7 @@ public class ReceiptPaymentController extends BaseController{
      * @todo: 添加交易记录
      * @param:   * @param null
      */
-    @PostMapping(value = "/save",consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/save")
     public Map save(@RequestBody  @Validated(GroupWithoutID.class)ReceiptPayment receiptPayment,String token){
         //不论用户端传过来的钱包id是什么，都是以token为主
         receiptPayment.setWalletId(token);
@@ -68,7 +68,8 @@ public class ReceiptPaymentController extends BaseController{
      */
     @GetMapping("/getAll")
     public Map getAll( String token){
-       receiptPayment.setId(token);
+        //token=walletId,传入token即按照walletId查询信息
+       receiptPayment.setWalletId(token);
        List<ReceiptPayment> receiptPayments = receiptPaymentService.selectByParams(receiptPayment);
        //分页查询
        if (receiptPayments.isEmpty()){

@@ -28,15 +28,17 @@
     payment_type,wallet_balance,remark,create_time from receipt_payment
 
     <where>
-      <if test="id != null and id != ''"> and id = #{id} </if>
-      <if test="walletId != null and walletId != ''"> and wallet_id = #{walletId} </if>
-      <if test="serialNumber != null and serialNumber != ''"> and serial_number = #{serialNumber} </if>
-      <if test="receiptPaymentType != null and receiptPaymentType != ''"> and receipt_payment_type = #{receiptPaymentType} </if>
-      <if test="transactionAmount != null and transactionAmount != ''"> and transaction_amount = #{transactionAmount} </if>
-      <if test="paymentType != null and paymentType != ''"> and payment_type = #{paymentType} </if>
-      <if test="walletBalance != null and walletBalance != ''"> and wallet_balance = #{walletBalance} </if>
-      <if test="remark != null and remark != ''"> and remark = #{remark} </if>
-      <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+      <if test="walletId != null and walletId != ''">  wallet_id = #{walletId} </if>
+
+      <!--<if test="id != null and id != ''"> and id = #{id} </if>-->
+      <!--<if test="walletId != null and walletId != ''"> and wallet_id = #{walletId} </if>-->
+      <!--<if test="serialNumber != null and serialNumber != ''"> and serial_number = #{serialNumber} </if>-->
+      <!--<if test="receiptPaymentType != null and receiptPaymentType != ''"> and receipt_payment_type = #{receiptPaymentType} </if>-->
+      <!--<if test="transactionAmount != null and transactionAmount != ''"> and transaction_amount = #{transactionAmount} </if>-->
+      <!--<if test="paymentType != null and paymentType != ''"> and payment_type = #{paymentType} </if>-->
+      <!--<if test="walletBalance != null and walletBalance != ''"> and wallet_balance = #{walletBalance} </if>-->
+      <!--<if test="remark != null and remark != ''"> and remark = #{remark} </if>-->
+      <!--<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>-->
     </where>
     <choose>
       <otherwise>
