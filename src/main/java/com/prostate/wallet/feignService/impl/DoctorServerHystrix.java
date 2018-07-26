@@ -1,4 +1,4 @@
-//package com.prostate.order.feignService.impl;
+//package com.prostate.wallet.feignService.impl;
 //
 //import com.prostate.wallet.feignService.DoctorServer;
 //import org.springframework.stereotype.Component;

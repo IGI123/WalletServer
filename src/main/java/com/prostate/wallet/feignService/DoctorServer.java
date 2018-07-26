@@ -1,10 +1,11 @@
-//package com.prostate.order.feignService;
+//package com.prostate.wallet.feignService;
 //
 //import com.prostate.wallet.feignService.impl.DoctorServerHystrix;
 //import org.springframework.cloud.openfeign.FeignClient;
 //import org.springframework.web.bind.annotation.GetMapping;
 //
 //import java.util.Map;
+//
 //
 ///**
 // * 调用 DoctorServer 中的 API

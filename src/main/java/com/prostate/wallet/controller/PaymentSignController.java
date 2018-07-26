@@ -1,12 +1,11 @@
 package com.prostate.wallet.controller;
 
-import com.prostate.wallet.entity.GroupID;
-import com.prostate.wallet.entity.GroupWithoutID;
+
 import com.prostate.wallet.entity.PaymentSign;
 import com.prostate.wallet.service.DoctorWalletService;
 import com.prostate.wallet.service.PaymentSignService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +19,7 @@ import java.util.Map;
  * @Date: 2018/7/18 16:13
  * @Todo:  支付密码控制
  */
+@Slf4j
 @RestController
 @RequestMapping("/paymentSign")
 public class PaymentSignController  extends BaseController {
@@ -33,6 +33,8 @@ public class PaymentSignController  extends BaseController {
 
     @Autowired
     private PaymentSign paymentSign;
+
+
     /**
      * @Author: bian
      * @Date: 2018/7/18 16:17
@@ -49,6 +51,7 @@ public class PaymentSignController  extends BaseController {
             return queryEmptyResponse();
         }
         if (paymentSignService.insertSelective(paymentSign) > 0){
+            log.info("创建支付密码");
             return insertSuccseeResponse();
         }else {
             return  insertFailedResponse();
@@ -70,6 +73,7 @@ public class PaymentSignController  extends BaseController {
         paymentSign.setId(token);
         paymentSign.setWalletId(token);
         if (paymentSignService.updateSelective(paymentSign) > 0){
+            log.info("修改支付密码");
             return updateSuccseeResponse();
         }else {
             return updateFailedResponse();

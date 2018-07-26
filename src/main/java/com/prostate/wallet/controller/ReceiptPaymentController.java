@@ -1,17 +1,16 @@
 package com.prostate.wallet.controller;
 
 import com.prostate.wallet.entity.DoctorWallet;
-import com.prostate.wallet.entity.GroupID;
 import com.prostate.wallet.entity.GroupWithoutID;
 import com.prostate.wallet.entity.ReceiptPayment;
 import com.prostate.wallet.service.DoctorWalletService;
 import com.prostate.wallet.service.ReceiptPaymentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +19,7 @@ import java.util.Map;
  * @Date: 2018/7/18 10:40
  * @Todo:  交易记录相关
  */
+@Slf4j
 @RestController
 @RequestMapping("/receiptPayment")
 public class ReceiptPaymentController extends BaseController{
@@ -50,6 +50,7 @@ public class ReceiptPaymentController extends BaseController{
                 //将余额信息重新写入交易记录表
                 receiptPayment.setWalletBalance(doctorWallet.getWalletBalance());
                 receiptPaymentService.updateSelective(receiptPayment);
+                log.info(token+"新增交易记录");
                 return insertSuccseeResponse();
             }catch (Exception e){
                 return queryEmptyResponse();
